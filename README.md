@@ -60,7 +60,20 @@ node index.js
 
 ## API Documentation
 
-### Authentication
+### Postman Collection
+The API documentation is available in the [Backend-Assignment.postman_collection.json](cci:7://file:///c:/Users/Tanya/OneDrive/Desktop/Backend-assignment/Backend-Assignment.postman_collection.json:0:0-0:0) file, which includes all the endpoints with example requests and responses. You can import this collection into Postman to test the API endpoints.
+
+To use the Postman collection:
+1. Import the [Backend-Assignment.postman_collection.json](cci:7://file:///c:/Users/Tanya/OneDrive/Desktop/Backend-assignment/Backend-Assignment.postman_collection.json:0:0-0:0) file into Postman
+2. Set up environment variables:
+   - `baseUrl`: `http://localhost:5000`
+   - `jwtToken`: Your JWT token (after login)
+3. Use the pre-request scripts and test scripts included in the collection
+4. Test all endpoints with example data included in the collection
+
+### Detailed API Documentation
+
+#### Authentication
 
 #### User Signup
 - **POST** `/api/auth/signup`

@@ -90,3 +90,32 @@
 [2025-05-03T12:46:38.747Z] Starting stock threshold check...
 [2025-05-03T12:46:39.050Z] Found 0 products to check
 [2025-05-03T12:46:39.051Z] No products below threshold found
+[2025-05-03T12:47:27.348Z] Starting stock monitoring service
+[2025-05-03T12:47:27.352Z] Checking stock every 60 minutes
+[2025-05-03T12:47:27.359Z] Stock threshold set to 20%
+[2025-05-03T12:47:27.362Z] Starting stock threshold check...
+[2025-05-03T12:47:27.746Z] Found 0 products to check
+[2025-05-03T12:47:27.750Z] No products below threshold found
+[2025-05-03T12:47:38.352Z] Starting stock monitoring service
+[2025-05-03T12:47:38.395Z] Checking stock every 60 minutes
+[2025-05-03T12:47:38.500Z] Stock threshold set to 20%
+[2025-05-03T12:47:38.612Z] Starting stock threshold check...
+[2025-05-03T12:47:39.011Z] Error checking stock threshold:
+[2025-05-03T12:48:08.810Z] Starting stock monitoring service
+[2025-05-03T12:48:08.826Z] Checking stock every 60 minutes
+[2025-05-03T12:48:08.837Z] Stock threshold set to 20%
+[2025-05-03T12:48:08.852Z] Starting stock threshold check...
+[2025-05-03T12:48:09.200Z] Found 0 products to check
+[2025-05-03T12:48:09.205Z] No products below threshold found
+[2025-05-03T12:48:51.669Z] Starting stock monitoring service
+[2025-05-03T12:48:51.679Z] Checking stock every 60 minutes
+[2025-05-03T12:48:51.711Z] Starting stock monitoring service
+[2025-05-03T12:48:51.725Z] Checking stock every 60 minutes
+[2025-05-03T12:48:51.731Z] Stock threshold set to 20%
+[2025-05-03T12:48:51.752Z] Stock threshold set to 20%
+[2025-05-03T12:48:51.795Z] Starting stock threshold check...
+[2025-05-03T12:48:51.816Z] Starting stock threshold check...
+[2025-05-03T12:48:52.184Z] Found 0 products to check
+[2025-05-03T12:48:52.188Z] No products below threshold found
+[2025-05-03T12:48:52.198Z] Found 0 products to check
+[2025-05-03T12:48:52.205Z] No products below threshold found
