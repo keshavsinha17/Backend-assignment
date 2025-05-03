@@ -1,0 +1,378 @@
+{
+  "info": {
+    "name": "Backend Assignment API",
+    "description": "API endpoints for user authentication, product management, and order processing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup (User)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john@example.com\",\n  \"phoneNumber\": \"1234567890\",\n  \"password\": \"password123\",\n  \"location\": {\n    \"latitude\": 19.0760,\n    \"longitude\": 72.8777\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/signup",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "signup"]
+            },
+            "description": "Creates a new user account. User will be pending approval by admin."
+          }
+        },
+        {
+          "name": "Signup (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Admin\",\n  \"lastName\": \"User\",\n  \"email\": \"admin@example.com\",\n  \"phoneNumber\": \"9876543210\",\n  \"password\": \"admin123\",\n  \"location\": {\n    \"latitude\": 19.0760,\n    \"longitude\": 72.8777\n  },\n  \"isAdmin\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/signup",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "signup"]
+            },
+            "description": "Creates a new admin account. Admin accounts are automatically approved."
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "auth", "login"]
+            },
+            "description": "Login with email/phone and password. Returns JWT token in cookies."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "users"]
+            },
+            "description": "Get list of all users with search and status filtering.\n\nQuery Parameters:\n- search: Search by name, email, or phone\n- status: Filter by user status (pending, approved, rejected)"
+          }
+        },
+        {
+          "name": "Update User Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"645123456789012345678901\",\n  \"status\": \"approved\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/admin/users/:userId/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "users", ":userId", "status"]
+            },
+            "description": "Update user status. Valid statuses: pending, approved, rejected, blocked"
+          }
+        },
+        {
+          "name": "Add Warehouse",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Central Warehouse\",\n  \"location\": {\n    \"latitude\": 19.0760,\n    \"longitude\": 72.8777\n  },\n  \"capacity\": 1000,\n  \"address\": \"123 Warehouse St, Mumbai\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/admin/warehouses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "warehouses"]
+            },
+            "description": "Create a new warehouse with specified capacity and location"
+          }
+        },
+        {
+          "name": "Add Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Product 1\",\n  \"description\": \"Sample product\",\n  \"price\": 100,\n  \"stock\": 50,\n  \"originalStock\": 50,\n  \"warehouseId\": \"645123456789012345678901\",\n  \"location\": {\n    \"latitude\": 19.0760,\n    \"longitude\": 72.8777\n  },\n  \"category\": \"electronics\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/admin/products",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "products"]
+            },
+            "description": "Add a new product to a specific warehouse. Stock will be deducted when orders are placed."
+          }
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"accepted\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/admin/orders/:id/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "orders", ":id", "status"]
+            },
+            "description": "Update order status. Valid statuses: pending, accepted, rejected, delivered"
+          }
+        },
+        {
+          "name": "Get All Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/admin/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "admin", "orders"]
+            },
+            "description": "Get list of all orders with user and product details"
+          }
+        },
+        {
+          "name": "Create Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"645123456789012345678901\",\n  \"title\": \"Order Update\",\n  \"message\": \"Your order has been shipped\",\n  \"type\": \"order\",\n  \"data\": {\n    \"orderId\": \"ORDER_ID\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/notifications",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "notifications"]
+            },
+            "description": "Create a notification for a user\n\nTypes: order, stock, system"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\n    {\n      \"productId\": \"645123456789012345678901\",\n      \"quantity\": 1\n    }\n  ],\n  \"deliveryAddress\": \"123 User St, Mumbai\",\n  \"deliveryLocation\": {\n    \"latitude\": 19.0760,\n    \"longitude\": 72.8777\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "orders"]
+            },
+            "description": "Create a new order. Stock will be checked and updated automatically."
+          }
+        },
+        {
+          "name": "Get Order",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/orders/:id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "orders", ":id"]
+            },
+            "description": "Get order details by ID"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public",
+      "item": [
+        {
+          "name": "Get Nearby Products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/products/nearby?latitude=19.0760&longitude=72.8777",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "products", "nearby"],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "19.0760"
+                },
+                {
+                  "key": "longitude",
+                  "value": "72.8777"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// This script will run before each request"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// This script will run after each request"
+        ]
+      }
+    }
+  ]
+}
